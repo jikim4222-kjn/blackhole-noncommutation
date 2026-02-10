@@ -28,12 +28,6 @@ The framework assumes no geometry, Hilbert space, or microscopic dynamics.
 
 - **diagrams/**  
   Figures illustrating stabilization, observation, non‑commutation, and Page‑curve structure.
-  
-  [Stabilization vs Observation](diagrams/stabilization_observation.pdf)
-
-  [Non-Commuting Region](diagrams/noncommuting_region.pdf)
-  
-  [Page Curve Structure](diagrams/page_curve_structure.pdf)
 
 - **notes/**  
   Supplementary explanations, background, and conceptual clarifications.
