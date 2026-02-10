@@ -1,0 +1,297 @@
+% !TEX program = xelatex
+% NOTE: Unicode 文字のため、XeLaTeX（または LuaLaTeX）でコンパイルしてください。
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+\usepackage{xeCJK}
+\setmainfont{TeX Gyre Termes}
+\IfFontExistsTF{Noto Serif CJK JP}{\setCJKmainfont{Noto Serif CJK JP}}{%
+  \IfFontExistsTF{Source Han Serif JP}{\setCJKmainfont{Source Han Serif JP}}{%
+    \IfFontExistsTF{HaranoAjiMincho}{\setCJKmainfont{HaranoAjiMincho}}{%
+      \setCJKmainfont{IPAMincho}% last-resort fallback
+    }%
+  }%
+}%
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{tikz-cd}
+\usepackage{multicol}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage[final]{microtype}
+\usepackage[numbers]{natbib}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1\baselineskip}
+
+\newtheorem{definition}{Definition}
+\newtheorem{prop}{Proposition}
+\newtheorem{exmp}{Example}
+
+\begin{document}
+
+\title{Black Holes as Persistent Non-Commutation between Stabilization and Observation}
+\author{Jiyoong Kim}
+\date{}
+\maketitle
+\begin{abstract}
+Black holes are formulated as regions where internal stabilization and external observation fail to commute in a structurally persistent manner. Configurations evolve under an idempotent stabilization functor representing internal equilibration, while observation is modeled as a projection to externally accessible descriptions. A natural comparison map relates stabilized configurations to stabilized observations; its failure to be invertible identifies a mismatch between internal distinctions and observable structure. A black-hole region is defined as a full subcategory on which this non-commutation is stable under restriction. Horizons arise as commutation boundaries independent of geometric assumptions. Evaporation corresponds to the dynamical shrinkage of the non-commuting region, and observable entropy quantifies the resulting structural loss of distinguishability. Page-curve behavior follows from monotonicity of entropy under expansion and contraction of the non-commuting domain, while island constructions correspond to effective enlargements of the commutative region. The framework introduces no microscopic dynamics and isolates the information problem as a structural incompatibility between stabilization and observation.
+\end{abstract}
+
+\section{Introduction}
+
+Black holes play a central role in the foundations of gravity and quantum theory.
+While their geometric description in general relativity is well understood, the compatibility between semiclassical evaporation and quantum information remains structurally subtle.
+
+The information problem is commonly expressed as a tension between:
+\begin{itemize}
+  \item apparent information loss in semiclassical evolution,
+  \item the expectation of unitary fundamental dynamics.
+\end{itemize}
+
+Holographic duality and island constructions suggest that this tension may admit resolution within refined descriptions \citep{Maldacena1998,RyuTakayanagi2006,HubenyRangamaniTakayanagi2007,AlmheiriHartmanMaldacenaShaghoulianTajdini2019,AlmheiriMahajanMaldacenaZhao2019}. Yet the structural locus of the mismatch---where internal distinctions fail to be reflected in observables---remains unclear.
+
+This paper does not introduce a new microscopic model, nor challenge geometric or holographic approaches. Instead, it proposes a minimal structural reformulation.
+
+The central distinction is between:
+\begin{itemize}
+  \item internal stabilization of configurations, and
+  \item externally accessible observation.
+\end{itemize}
+
+Here ``stabilization'' may be read heuristically as any process by which internal degrees of freedom settle into an effective description---for example through decoherence, coarse-grained equilibration, or gravitational relaxation.
+For background on decoherence and pointer-state structure, see \citet{Zurek2003}.
+
+These operations need not commute. When their incompatibility persists in a region, observable descriptions fail to encode stabilized internal structure.
+
+Persistent non-commutation provides a structural characterization of black-hole regions.
+
+The formulation is intentionally abstract: no metric background, Hilbert-space structure, or specific entropy functional is assumed. The information problem is isolated as a question of compatibility between stabilization and observation.
+
+\section{Minimal Generative Framework}
+
+\subsection{Configurational category}
+
+Let $\mathcal{C}$ be a category whose objects represent configurations---states, relations, or histories---and whose morphisms encode admissible transformations. No geometric or Hilbert-space structure is assumed.
+
+\subsection{Stabilization}
+
+Introduce an idempotent endofunctor
+\[
+  S : \mathcal{C} \to \mathcal{C},
+  \qquad S^{2} \cong S,
+\]
+representing internal stabilization: once applied, further stabilization does not alter the effective description.
+
+\subsection{Observation}
+
+Introduce
+\[
+  \Pi : \mathcal{C} \to \mathcal{O},
+\]
+where $\mathcal{O}$ is a category of observables. Objects represent externally accessible descriptions.
+
+$\Pi$ is generally information-losing.
+
+\subsection{Observable stabilization}
+
+Introduce
+\[
+  S_{\mathcal{O}} : \mathcal{O} \to \mathcal{O},
+\]
+representing coarse-graining at the observable level.
+
+\subsection{Natural comparison}
+
+Assume a natural transformation
+\[
+  \eta : \Pi \circ S \Longrightarrow S_{\mathcal{O}} \circ \Pi.
+\]
+For each $X \in \mathcal{C}$,
+\[
+  \eta_{X} : \Pi(SX) \to S_{\mathcal{O}}(\Pi X).
+\]
+
+The direction of $\eta$ implies a mapping from the strictly internally stabilized observation to the externally coarse-grained observation. Since observation is typically information-losing, invertibility is not expected.
+
+Stabilization and observation commute on $X$ if $\eta_{X}$ is an isomorphism. Failure of invertibility expresses structural mismatch between internal stabilization and observable description.
+
+\begin{prop}[Non-faithful observation implies mismatch]
+If observation $\Pi$ is non-faithful and stabilization $S$ preserves distinctions that $\Pi$ erases, then $\eta_X$ is not an isomorphism.
+\end{prop}
+
+\begin{proof}
+Because $\Pi$ erases distinctions that $S$ preserves, the two sides of $\eta_X$ cannot be equivalent.
+\end{proof}
+
+\begin{exmp}[Quantum channels (informal)]
+In finite-dimensional quantum systems, let $S$ be decoherence and $\Pi$ a partial trace. Decoherence preserves distinctions that the partial trace erases, so $\eta_X$ is generically non-invertible. (Details in Appendix A.)
+\end{exmp}
+
+\section{Black Holes as Persistent Non-Commutation}
+
+\subsection{Definition}
+
+Let $\mathcal{R} \subseteq \mathcal{C}$ be a full subcategory with inclusion
+\[
+  \iota : \mathcal{R} \hookrightarrow \mathcal{C}.
+\]
+
+\begin{definition}[Black-hole region]
+Let $\mathcal{R} \subseteq \mathcal{C}$ be a full subcategory. We say that $\mathcal{R}$ is a black-hole region if, for every $X \in \mathcal{R}$, $\eta_{X}$ is not an isomorphism and this property persists under restriction to any full subcategory $\mathcal{R}' \subseteq \mathcal{R}$.
+\end{definition}
+
+This excludes accidental failures and isolates structurally robust non-commutation. The definition is static; time dependence enters through dynamical evolution of subcategories.
+\par\noindent
+\emph{Remark.} Persistence under restriction is a structural idealization; operationally it is checked by verifying non-invertibility of $\eta$ on all stabilized subconfigurations relevant to the chosen observational coarse-graining.
+
+\subsection{Horizon}
+
+A horizon is the boundary between regions where $\eta_{X}$ is an isomorphism and those where it is not. It is therefore a commutation boundary, independent of metric or causal structure.
+
+\subsection{Evaporation}
+
+Within a black-hole region, internal stabilization preserves distinctions that projection does not reflect.
+
+Evaporation corresponds to shrinkage of the non-commuting subcategory over time, restoring commutation on an increasing portion of the universe. Observable information recovery is interpreted as restoration of commutation.
+
+\section{Page Curve and Observable Information}
+
+\subsection{Observable entropy}
+
+In a non-commuting region, stabilized distinctions are not observable; we interpret the resulting loss of distinguishability as observable entropy. The term is used structurally, without fixing an entropic functional.
+
+\subsection{Structural compatibility with Page behavior}
+
+Let $X(t) \in \mathcal{C}$ and let $\mathcal{R}(t)$ denote the region where $\eta$ fails to be an isomorphism.
+
+If observable entropy is any monotone measure of the size or complexity of $\mathcal{R}(t)$, then Page-type behavior follows: entropy grows during expansion of non-commutation and decreases as commutation is restored. Complete entropy return is not axiomatically guaranteed; it is contingent upon the specific dynamical restoration of commutation.
+\par\noindent
+\emph{Physical interpretation.} Monotonicity of the non-commuting region corresponds physically to the growth and subsequent shrinkage of the domain in which stabilized distinctions remain unobservable.
+
+\subsection{Information recovery}
+
+Information recovery corresponds to restoration of commutation. Island constructions can be interpreted as enlargements of the domain on which $\eta_{X}$ becomes invertible.
+
+\section{Relation to Standard Frameworks}
+
+\subsection{Geometry}
+
+Geometric horizons may be viewed as realizations of commutation boundaries. The definition does not rely on metric structure and applies in more general settings, including regimes where causal structure is emergent.
+
+\subsection{Unitarity}
+
+The framework neither assumes nor denies global unitarity. It reformulates the information problem as mismatch between internal stabilization and observable description. The framework is agnostic regarding microscopic unitarity and reorganizes the locus of apparent information loss.
+
+\section{Conclusion}
+
+We have proposed a minimal structural reformulation of black-hole regions in terms of persistent non-commutation between stabilization and observation. Without introducing new microscopic dynamics or geometric assumptions, this framework isolates the information problem as a question of compatibility between internal and observable operations. Black holes are characterized not by specific ontology, but by a robust mismatch between stabilization and observation.
+
+\bibliographystyle{unsrtnat}
+\bibliography{references}
+
+\appendix
+\section*{Appendix: Examples and Structural Propositions}
+
+\subsection*{A. Example: Quantum channels as a concrete instance}
+
+\begin{exmp}[Quantum channels]
+Let $\mathcal{C}$ be the category whose objects are finite-dimensional quantum systems and whose morphisms are completely positive trace-preserving (CPTP) maps. Let $\mathcal{O}$ be a category of externally accessible (coarse-grained) descriptions.
+
+\medskip
+\noindent
+\textbf{Stabilization.}
+Fix a pointer decomposition $\{P_i\}$ and define an idempotent decoherence channel
+\[
+S(\rho)=\sum_i P_i \rho P_i,
+\qquad S^2 = S.
+\]
+
+\medskip
+\noindent
+\textbf{Observation.}
+Let $\Pi$ be a partial trace over an inaccessible subsystem:
+\[
+\Pi(\rho_{AB})=\mathrm{Tr}_B(\rho_{AB}).
+\]
+
+\medskip
+\noindent
+\textbf{Observable stabilization.}
+Let $S_{\mathcal{O}}$ be a coarse-graining operation on the observable subsystem $A$ (e.g.\ binning, operational equivalence, or projection to a classical description).
+
+\medskip
+\noindent
+\textbf{Comparison.}
+The natural transformation
+\[
+\eta:\Pi\circ S \Longrightarrow S_{\mathcal{O}}\circ \Pi
+\]
+has components
+\[
+\eta_X:\Pi(SX)\to S_{\mathcal{O}}(\Pi X),
+\]
+which compare ``decohere then trace'' with ``trace then coarse-grain.'' Such a comparison map is canonical whenever both procedures land in the same coarse-grained description class in $\mathcal{O}$, so that the coarse-graining operation induces a morphism between the resulting observable descriptions.
+
+\medskip
+\noindent
+If subsystem $B$ carries distinctions that affect $SX$ but are erased by $\Pi$, then $\eta_X$ cannot be invertible: stabilization preserves distinctions that are not reflected under observation. This provides a standard quantum-information instance of non-commutation.
+\end{exmp}
+
+\subsection*{B. A sufficient condition for non-invertibility of $\eta_X$}
+
+\begin{prop}[Sufficient condition]
+Let $S:\mathcal{C}\to\mathcal{C}$ be idempotent, $\Pi:\mathcal{C}\to\mathcal{O}$ be non-faithful, and $S_{\mathcal{O}}:\mathcal{O}\to\mathcal{O}$ be a coarse-graining endofunctor. Assume there exists a morphism $f:X\to Y$ in $\mathcal{C}$ such that $S(f)$ is nontrivial while $\Pi(f)$ is trivial (e.g.\ maps to an identity or collapses to an indistinguishable morphism in $\mathcal{O}$). Then the component
+\[
+\eta_X:\Pi(SX)\to S_{\mathcal{O}}(\Pi X)
+\]
+is not an isomorphism.
+\end{prop}
+
+\begin{proof}
+If $\Pi(f)$ is trivial while $S(f)$ is nontrivial, then $S$ preserves a distinction witnessed by $f$ that is not reflected by $\Pi$. Consequently, the composites $\Pi\circ S$ and $S_{\mathcal{O}}\circ\Pi$ cannot be naturally isomorphic at $X$: any invertible comparison would force the stabilized distinction visible in $\Pi(SX)$ to correspond to an equally distinguishable feature of $S_{\mathcal{O}}(\Pi X)$, contradicting the trivialization under $\Pi$. Hence $\eta_X$ is not invertible.
+\end{proof}
+
+\medskip
+\noindent
+This condition is satisfied in many physical settings, including decoherence followed by coarse-grained observation, or ``bulk'' stabilization followed by ``boundary'' projection in holographic-inspired contexts.
+
+\subsection*{C. Structural Page behavior}
+
+Let $\mathcal{R}(t)\subseteq\mathcal{C}$ denote the non-commuting region at time $t$, i.e.\ the full subcategory on which $\eta_X$ fails to be an isomorphism.
+
+Let $E$ be an entropy-like functional on (equivalence classes of) full subcategories satisfying:
+\begin{enumerate}
+  \item \textbf{Monotonicity.} If $\mathcal{R}_1\subseteq\mathcal{R}_2$, then $E(\mathcal{R}_1)\le E(\mathcal{R}_2)$.
+  \item \textbf{Stability under equivalence.} $E(\mathcal{R})$ depends only on the equivalence class of $\mathcal{R}$.
+\end{enumerate}
+
+\begin{prop}[Structural Page behavior]
+If $\mathcal{R}(t)$ expands during an early phase and contracts during a late phase, then
+\[
+E(t):=E(\mathcal{R}(t))
+\]
+exhibits Page-type behavior: monotone growth followed by monotone decay.
+\end{prop}
+
+\begin{proof}
+During expansion, $t_1<t_2$ implies $\mathcal{R}(t_1)\subseteq\mathcal{R}(t_2)$, hence $E(t_1)\le E(t_2)$ by monotonicity. During contraction, inclusions reverse, giving $E(t_1)\ge E(t_2)$.
+\end{proof}
+
+\noindent
+This argument is independent of any specific entropic functional or microscopic dynamics.
+
+\subsection*{D. Islands as restoration of commutation}
+
+Let $\mathcal{I}\subseteq\mathcal{C}$ be a subregion.
+
+\begin{prop}[Structural island interpretation]
+If $\eta_X$ is an isomorphism for all $X\in \mathcal{I}$, then $\mathcal{I}$ behaves as part of the commutative domain: observable descriptions computed after stabilization on $\mathcal{I}$ agree with those obtained by stabilizing observable data on $\Pi(\mathcal{I})$. Equivalently, the effective commutative region is enlarged by $\mathcal{I}$.
+\end{prop}
+
+\noindent
+This provides a structural interpretation of island constructions: islands correspond to regions where commutation between stabilization and observation is restored, allowing distinctions in $\mathcal{I}$ to contribute to observable entropy through the commutative description.
+
+\end{document}
