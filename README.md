@@ -1,6 +1,7 @@
 # blackhole-noncommutation
 Black holes as regions where stabilization and observation fail to commute, formulated in a minimal categorical framework. The repository hosts the manuscript, diagrams, examples, and supplementary notes, together presenting a structural approach to horizons, evaporation, Page behavior, and islands without assuming geometry or microscopic dynamics.
 
+[![DOI](https://zenodo.org/badge/1154120327.svg)](https://doi.org/10.5281/zenodo.18582317)
 
 # Black Holes as Persistent Non-Commutation between Stabilization and Observation
 
@@ -34,7 +35,3 @@ The framework assumes no geometry, Hilbert space, or microscopic dynamics.
 
 - **examples/**  
   Concrete realizations of the abstract framework, including quantum‑channel models.
-
-## Citation
-
-A Zenodo DOI will be added upon release.
