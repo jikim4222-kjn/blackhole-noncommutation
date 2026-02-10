@@ -1,5 +1,3 @@
-# **notes/intuition.md**
-
 ## Intuition: Stabilization, Observation, and Non-Commutation
 
 The framework separates two structural operations:
